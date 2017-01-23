@@ -655,7 +655,7 @@ function getPlaylistPlain(data) {
     var content = '', time = '', artist = '', album = '', title = '', name='', str = '', filename = '', path = '', id = 0, songid = '', bottomline = '', totaltime = '', pos = 0;
     var i, line, lines = data.split('\n'), infos=[];
     for (i = 0; (line = lines[i]); i += 1) {
-        infos = line.split(': ');
+        infos = line.split(/: (.+)?/);
         if ('Time' === infos[0]) {
             time = parseInt(infos[1]);
         }

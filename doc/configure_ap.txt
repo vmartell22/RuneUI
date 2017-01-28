@@ -143,23 +143,6 @@ $redis->Set('lock_wifiscan', 0);
 $redis->close();
 =========================================================================================================================================================
 
-
-
-systemctl enable dnsmasq
-
-redis-cli hset AccessPoint enabled 1
-# redis-cli hset AccessPoint enable-NAT 1  - DON'T
-redis-cli hgetall AccessPoint
-
-redis-cli hset AccessPoint ssid "YourNewSSID"
-redis-cli hset AccessPoint passphrase "YourNewPassphrase"
-
-redis-cli hset AccessPoint ip-address "192.168.12.1"
-redis-cli hset AccessPoint broadcast "192.168.12.255"
-redis-cli hset AccessPoint dhcp-range "192.168.12.2,192.168.12.254,24h"
-redis-cli hset AccessPoint dhcp-option "option:dns-server,192.168.12.1"
-
-
 [root@runeaudio system]# pwd
 /usr/lib/systemd/system
 [root@runeaudio system]# cat dnsmasq.service 
@@ -180,14 +163,17 @@ ExecReload=/bin/kill -HUP $MAINPID
 WantedBy=multi-user.target
 =======================================================================================================================================
 
+systemctl enable dnsmasq
 
+redis-cli hset AccessPoint enabled 1
+# redis-cli hset AccessPoint enable-NAT 1  - DON'T
+redis-cli hgetall AccessPoint
 
+redis-cli hset AccessPoint ssid "YourNewSSID"
+redis-cli hset AccessPoint passphrase "YourNewPassphrase"
 
-
-
-
-
-
-
-
+redis-cli hset AccessPoint ip-address "192.168.12.1"
+redis-cli hset AccessPoint broadcast "192.168.12.255"
+redis-cli hset AccessPoint dhcp-range "192.168.12.2,192.168.12.254,24h"
+redis-cli hset AccessPoint dhcp-option "option:dns-server,192.168.12.1"
 
